@@ -3,12 +3,11 @@ import tensorflow as tf
 from PIL import Image
 import streamlit as st
 
-@st.cache
-def load_model():
-	  return tf.keras.models.load_model('best_model')
+# @st.cache
+# def load_model():
+# 	  return tf.keras.models.load_model('best_model')
 
-model=load_model()
-
+model=tf.keras.models.load_model('best_model')
 
 st.markdown("## Vegetable Classifier")
 st.markdown("---")
