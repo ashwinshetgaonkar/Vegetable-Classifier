@@ -3,11 +3,8 @@ import tensorflow as tf
 from PIL import Image
 import streamlit as st
 
-# @st.cache
-# def load_model():
-# 	  return tf.keras.models.load_model('best_model')
-
 model=tf.keras.models.load_model('best_model')
+
 
 st.markdown("## Vegetable Classifier")
 st.markdown("---")
@@ -17,7 +14,7 @@ uploaded_file = st.file_uploader("Upload your Image you want to classify:", type
 st.markdown(" ")
 if st.button('Predict'):
     img = Image.open(uploaded_file)
-    img = tf.convert_to_tensor(img)
+    img = tf.convert_to_tensor(img,dtype=tf.float32)
     img = tf.image.resize(img, size=[224, 224])
     img = tf.reshape(img, (1, 224, 224, 3))
     pred = tf.argmax(tf.squeeze(model.predict(img))).numpy()
@@ -26,7 +23,6 @@ if st.button('Predict'):
     st.write("Prediction: It's a ", predicted_class)
 else:
      pass
-
 
 
 
